@@ -18,7 +18,7 @@ const checkAuth = () => {
 
 const ProtectedRoute = ({component: Component, ...rest}) => {
     return (
-        <ProtectedRoute
+        <Route
         {...rest}
         render={(props) => checkAuth()
             ? <Component {...props} />
@@ -31,7 +31,7 @@ const Router = () => {
     return (
         <Switch>
             <Route path="/login" component={Login} />
-            <Route exact path="/" component={Home} />
+            <ProtectedRoute exact path="/" component={Home} />
             <ProtectedRoute path="/about" component={About} />
             <ProtectedRoute path="/car/:id" component={Car} />
         </Switch>
