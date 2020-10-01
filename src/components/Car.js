@@ -3,8 +3,8 @@ import cars from '../cars.json'
 import { Container, Paper, Chip } from '@material-ui/core';
 
 const Car = (props) => {
-    const id = props.match.params.id
-    const car = cars.find(c => c.id == id)
+    const id = parseInt(props.match.params.id)
+    const car = cars.find(c => c.id === id)
 
     return (
         <Container maxWidth="sm" className="car-container">
