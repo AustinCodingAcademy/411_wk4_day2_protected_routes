@@ -38,6 +38,7 @@ ul {
 }
 
 .nav-list {
+  font-size: large;
   list-style: none;
   display: flex;
 }
