@@ -6,22 +6,34 @@ import About from './components/About'
 import Car from './components/Car'
 import Login from './components/Login'
 
-// Write checkAuth function here
-// Check the cookies for a cookie called "loggedIn"
+let checkAuth=()=> {
+    let loggedIn = cookie.parse(document.cookie)['loggedIn'];
+    return loggedIn? true: false;
+}
 
-
-// Write ProtectedRoute function here
-
+let ProtectedRoute = ({ component: Component, ...rest }) => {    
+    let loggedIn = checkAuth();    
+    return (
+        <Route {...rest}
+            render={(props) => {
+                return (loggedIn
+                    ? <Component {...props} />
+                    : <Redirect to={{ pathname: '/login', fromLocation: props.location.pathname }} />
+                )
+            }} />
+    )
+};
 
 const Router = () => {
     return (
         <Switch>
             <Route path="/login" component={Login} />
-            <Route exact path="/" component={Home} />
-            <Route path="/about" component={About} />
-            <Route path="/car/:id" component={Car} />
+            <ProtectedRoute exact path="/" component={Home} />
+            <ProtectedRoute path="/about" component={About} />
+            <ProtectedRoute path="/car/:id" component={Car} />
         </Switch>
     );
 };
 
 export default Router;
+
