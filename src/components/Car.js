@@ -4,7 +4,7 @@ import { Container, Paper, Chip } from '@material-ui/core';
 
 const Car = (props) => {
     const id = props.match.params.id
-    const car = cars.find(c => c.id == id)
+    const car = cars.find(c => c.id.toString() === id)
 
     return (
         <Container maxWidth="sm" className="car-container">
@@ -12,7 +12,7 @@ const Car = (props) => {
                 <h2>{car.Name}</h2>
                 {
                     Object.keys(car).map((key, idx) => {
-                        return <Chip label={`${key}: ${car[key]}`}></Chip>
+                        return <Chip key={idx} label={`${key}: ${car[key]}`}></Chip>
                     })
                 }
             </Paper>
