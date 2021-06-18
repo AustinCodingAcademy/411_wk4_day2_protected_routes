@@ -8,10 +8,23 @@ import Login from './components/Login'
 
 // Write checkAuth function here
 // Check the cookies for a cookie called "loggedIn"
-
+const checkAuth = () => {
+    const cookies = cookie.parse(document.cookie)
+    return cookies["loggedIn"] ? true : false
+}
 
 // Write ProtectedRoute function here
-
+const ProtectedRoute = ({component: Component, ...rest}) => {
+    return (
+        <Route
+        {...rest}
+        render={(props) => checkAuth() === true
+            ? <Component {...props}/>
+            : <Redirect to={{pathname: '/login', state: {from: props.location}}} />
+        }
+        />
+    )
+}
 
 const Router = () => {
     return (
