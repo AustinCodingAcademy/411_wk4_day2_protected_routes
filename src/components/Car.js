@@ -5,7 +5,7 @@ import { Container, Paper, Chip } from '@material-ui/core';
 const Car = (props) => {
     const id = props.match.params.id
     const car = cars.find(c => c.id == id)
-
+    console.log(cars)
     return (
         <Container maxWidth="sm" className="car-container">
             <Paper className="car-paper">
